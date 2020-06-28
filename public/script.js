@@ -2,12 +2,11 @@ new Vue({
 	el: "#app",
 	data: {
 		total: 0,
-		products: [
-
-		],
+		products: [],
 		cart: [],
-		search: "",
+		search: "cat",
 		lastSearch: "",
+		loading: false,
 	},
 	methods: {
 		addToCart: function (product) {
@@ -41,12 +40,18 @@ new Vue({
 			}
 		},
 		onSubmit: function () {
+			this.products = [];
+			this.loading = true;
 			var path = "/search?q=".concat(this.search);
 			this.$http.get(path).then(function (response) {
 				this.products = response.body;
 				this.lastSearch = this.search;
+				this.loading = false;
 			});
 		},
+	},
+	created: function(){
+		this.onSubmit();
 	},
 	filters: {
 		currency: function (price) {
