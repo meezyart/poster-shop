@@ -61,7 +61,6 @@ new Vue({
 					LOAD_NUM + this.products.length
 				);
 				this.products = this.products.concat(toAppend);
-				console.log("Check =>: toAppend", toAppend);
 			}
 		},
 	},
